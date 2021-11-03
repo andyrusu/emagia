@@ -1,0 +1,27 @@
+{
+  "name": "andir/emagia",
+  "description": "Emag coding challenge.",
+  "type": "project",
+  "require": {
+    "symfony/console": "^5.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Emagia\\": "src/",
+      "Emagia\\Commands\\": "src/commands",
+      "Emagia\\Characters\\": "src/characters",
+      "Emagia\\Skills\\": "src/skills",
+      "Emagia\\Stats\\": "src/stats"
+    }
+  },
+  "authors": [
+    {
+      "name": "Andi Rusu",
+      "email": "rusu.andy1@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "codeception/codeception": "^4.1",
+    "codeception/module-asserts": "^1.0.0"
+  }
+}
