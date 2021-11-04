@@ -10,6 +10,7 @@ class WildBeast extends Character
 {
     public function __construct()
     {
+        //Define the stats
         $statsMap = new StatsMap([
             StatRange::instantiateAndGenerateValue(Character::STAT_HEALTH, 60, 90),
             StatRange::instantiateAndGenerateValue(Character::STAT_STRENGTH, 60, 90),
@@ -18,11 +19,15 @@ class WildBeast extends Character
             StatRange::instantiateAndGenerateValue(Character::STAT_LUCK, 25, 40),
         ]);
 
-        $skills = [
-            new Attack(),
-            new Defend($statsMap[Character::STAT_LUCK]),
-        ];
+        parent::__construct("Wild Beast", $statsMap);
 
-        parent::__construct("Wild Beast", $statsMap, $skills);
+        //Register the skills.
+        $this->registerSkills();
+    }
+
+    protected function registerSkills()
+    {
+        $this->registerSkill(new Attack());
+        $this->registerSkill(new Defend($this->getStat(Character::STAT_LUCK)->value));
     }
 }

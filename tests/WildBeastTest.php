@@ -12,17 +12,13 @@ class WildBeastTest extends \Codeception\Test\Unit
     protected function _before()
     {
         $this->wildBeast = new WildBeast();
-
-        $this->skills = [
-            new Attack(),
-            new Defend($this->wildBeast->getStat(WildBeast::STAT_LUCK)->value)
-        ];
     }
 
     // tests
     public function testWildBeastInstance()
     {
         $this->assertInstanceOf(StatsMap::class, $this->wildBeast->getStatsMap());
-        $this->assertEquals($this->wildBeast->getSkills(), $this->skills);
+        $skills = $this->wildBeast->getSkills();
+        $this->assertInstanceOf(Attack::class, $skills[0]);
     }
 }

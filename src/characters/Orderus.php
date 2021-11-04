@@ -12,6 +12,7 @@ class Orderus extends Character
 {
     public function __construct()
     {
+        //Define the stats
         $statsMap = new StatsMap([
             StatRange::instantiateAndGenerateValue(Character::STAT_HEALTH, 70, 100),
             StatRange::instantiateAndGenerateValue(Character::STAT_STRENGTH, 70, 80),
@@ -20,13 +21,17 @@ class Orderus extends Character
             StatRange::instantiateAndGenerateValue(Character::STAT_LUCK, 10, 30),
         ]);
 
-        $skills = [
-            new Attack(),
-            new Defend($statsMap[Character::STAT_LUCK]),
-            new RapidStrike(),
-            new MagickShield(),
-        ];
+        parent::__construct("Orderus", $statsMap);
 
-        parent::__construct("Orderus", $statsMap, $skills);
+        //Register the skills
+        $this->registerSkills();
+    }
+
+    protected function registerSkills()
+    {
+        $this->registerSkill(new Attack());
+        $this->registerSkill(new Defend($this->getStat(Character::STAT_LUCK)->value));
+        $this->registerSkill(new RapidStrike());
+        $this->registerSkill(new MagickShield());
     }
 }

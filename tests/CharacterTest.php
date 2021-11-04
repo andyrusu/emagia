@@ -32,10 +32,13 @@ class CharacterTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testCharacterInstanceException()
+    public function testCharacterSkillRegistration()
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $char = new Character("test", $this->statsMap, []);
+        $char = new Character("test", $this->statsMap);
+        $char->registerSkill(new Attack());
+
+        $skills = $char->getSkills();
+        $this->assertInstanceOf(Attack::class, $skills[0]);
     }
 
     public function testCharacterStat()

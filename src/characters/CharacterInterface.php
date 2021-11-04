@@ -2,8 +2,15 @@
 namespace Emagia\Characters;
 use Emagia\Stats\StatRangeInterface;
 use Emagia\Stats\StatsMapInterface;
+use Emagia\Skills\SkillInterface;
 
 interface CharacterInterface {
+    /**
+     * Register skill for the character.
+     * @param SkillInterface $skill the SkillInterface instance.
+     */
+    public function registerSkill(SkillInterface $skill) : void;
+
     /**
      * Calculates the damage value to be dealt to the $defender. (Does not trigger skills)
      * @param CharacterInterface $defender the character that will be dealt the damage.

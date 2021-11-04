@@ -15,28 +15,15 @@ class Character implements CharacterInterface {
     private $statsMap = null;
     private $skills = null;
 
-    public function __construct(string $name, StatsMapInterface $statsMap, array $skills) 
+    public function __construct(string $name, StatsMapInterface $statsMap) 
     {
         $this->name = $name;
         $this->statsMap = $statsMap;
-        $this->setSkills($skills);
     }
 
-    protected function setSkills(array $skills)
+    public function registerSkill(SkillInterface $skill) : void
     {
-        //Make sure that the $skills array is valid.
-        if (empty($skills))
-            throw new \InvalidArgumentException('$skills param has to be an array of SkillInterface instances');
-
-        foreach ($skills as $skill) 
-        {
-            if (!($skill instanceof SkillInterface))
-            {
-                throw new \InvalidArgumentException('$skills param has to be an array of SkillInterface instances');
-            }
-        }
-
-        $this->skills = $skills;
+        $this->skills[] = $skill;
     }
 
     public function calculateDamage(CharacterInterface $defender) : int 
